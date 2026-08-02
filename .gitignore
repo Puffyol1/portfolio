@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/
+
+# 依赖 / 构建（本站纯静态，通常无此目录，留作防护）
+node_modules/
+dist/
+.netlify/

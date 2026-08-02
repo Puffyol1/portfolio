@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计奕佳 · 作品集</title>
+    <meta
+      name="description"
+      content="计奕佳的个人作品集 — 产品经理方向，关注数据、内容与人的交叉点。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- 顶部轻量导航 -->
+    <header class="site-header" id="top">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav__logo" href="#top">计奕佳</a>
+        <ul class="nav__links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 1. 首屏 Hero -->
+      <section class="hero" id="hero" aria-labelledby="hero-name">
+        <div class="hero__inner reveal">
+          <p class="hero__tagline" data-hero="tagline"></p>
+          <div class="hero__name-wrap">
+            <span class="hero__name-en" aria-hidden="true">Jenny Ji</span>
+            <h1 class="hero__name" id="hero-name" data-hero="name"></h1>
+          </div>
+          <p class="hero__intro" data-hero="intro"></p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" data-hero="primaryCta"></a>
+            <a class="btn btn--ghost" data-hero="secondaryCta"></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 关于我 -->
+      <section class="section" id="about" aria-labelledby="about-heading">
+        <div class="container reveal">
+          <h2 class="section__heading" id="about-heading" data-about="heading"></h2>
+          <p class="section__lead" data-about="lead"></p>
+
+          <h3 class="subheading">Education</h3>
+          <ul class="edu" data-about="education"></ul>
+
+          <h3 class="subheading">Core Skills</h3>
+          <ul class="tags" data-about="keywords"></ul>
+
+          <h3 class="subheading">Interests</h3>
+          <p class="interest" data-about="interests"></p>
+        </div>
+      </section>
+
+      <!-- 3. 经历时间线 -->
+      <section class="section" id="experience" aria-labelledby="exp-heading">
+        <div class="container reveal">
+          <h2 class="section__heading" id="exp-heading" data-experience="heading"></h2>
+          <ul class="timeline" data-experience="items"></ul>
+        </div>
+      </section>
+
+      <!-- 4. 精选项目 -->
+      <section class="section" id="projects" aria-labelledby="proj-heading">
+        <div class="container reveal">
+          <h2 class="section__heading" id="proj-heading" data-projects="heading"></h2>
+          <div class="projects" data-projects="items"></div>
+        </div>
+      </section>
+
+      <!-- 5. 技能 -->
+      <section class="section" id="skills" aria-labelledby="skills-heading">
+        <div class="container reveal">
+          <h2 class="section__heading" id="skills-heading" data-skills="heading"></h2>
+          <div class="skills" data-skills="groups"></div>
+        </div>
+      </section>
+
+      <!-- 6. 联系方式 -->
+      <section class="section" id="contact" aria-labelledby="contact-heading">
+        <div class="container reveal contact">
+          <h2 class="section__heading" id="contact-heading" data-contact="heading"></h2>
+          <p class="section__lead" data-contact="lead"></p>
+          <ul class="channels" data-contact="channels"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p data-footer="note"></p>
+      </div>
+    </footer>
+
+    <script src="data/content.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
