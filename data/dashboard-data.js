@@ -13,9 +13,9 @@ window.DASH_DATA = {
   // ---- KPI（数字为虚构整数）----
   kpi: [
     { label: "意向 UV", value: 200, unit: "万", delta: 0.25, color: "blue" },
-    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "green" },
+    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "teal" },
     { label: "转化率", value: 0.25, isRate: true, delta: -0.05, color: "amber" },
-    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "pink" },
+    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "purple" },
   ],
 
   // ---- 渠道意向 UV（虚构）----
@@ -34,8 +34,8 @@ window.DASH_DATA = {
   // ---- 转化漏斗（虚构）----
   funnel: [
     { stage: "曝光", value: 500, color: "blue" },
-    { stage: "意向", value: 200, color: "teal" },
-    { stage: "支付", value: 50, color: "green" },
+    { stage: "意向", value: 200, color: "purple" },
+    { stage: "支付", value: 50, color: "pink" },
   ],
 
   // ---- 每日意向 UV 趋势（虚构，60 天）----
@@ -113,18 +113,17 @@ window.DASH_DATA = {
     { name: "景区 D", main: 35, extra: 25 },
   ],
 
-  // 调色板（多色，柔荧光系，与作品集协调）
+  // 调色板（鲜亮多彩）
   palette: {
-    blue: "#5fa8e6",
-    teal: "#3fb6ad",
-    green: "#5aa86a",
-    amber: "#e0a458",
-    pink: "#e07a9f",
-    purple: "#a07ac9",
-    slate: "#8a96a8",
-    blueSoft: "rgba(95,168,230,0.35)",
-    ink: "#232a35",
-    inkSoft: "#5b6573",
-    line: "rgba(95,168,230,0.14)",
+    blue: "#4f7cff",
+    teal: "#06c4d4",
+    green: "#18c96f",
+    amber: "#ff9f2e",
+    pink: "#ff5fa8",
+    purple: "#9b5cff",
+    slate: "#6b7390",
+    ink: "#1a1f2e",
+    inkSoft: "#4a5366",
+    line: "rgba(79,124,255,0.12)",
   },
 };

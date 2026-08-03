@@ -121,20 +121,23 @@
     var wrap = $("#chart-channel");
     if (!wrap) return;
     var data = d.channelIntent;
-    var colors = [P.blue, P.teal, P.amber];
+    var colors = [P.blue, P.purple, P.teal];
     var max = Math.max.apply(null, data.map(function (x) { return x.value; }));
     wrap.innerHTML =
       '<div class="bar-chart">' +
       data
         .map(function (x, i) {
           var h = Math.round((x.value / max) * 100);
+          var col = colors[i % colors.length];
           return (
             '<div class="bar-item">' +
             '<div class="bar" style="height:' +
             h +
-            "%; background:" +
-            colors[i % colors.length] +
-            '"><span class="bar__val">' +
+            "%; background:linear-gradient(to top, " +
+            col +
+            ", " +
+            col +
+            'cc)"><span class="bar__val">' +
             fmt(x.value, "万") +
             "</span></div>" +
             '<span class="bar__label">' +
@@ -249,7 +252,7 @@
     var data = d.category;
     var max = Math.max.apply(null, data.map(function (x) { return x.main + x.extra; }));
     var c1 = P.blue,
-      c2 = P.amber;
+      c2 = P.purple;
     wrap.innerHTML =
       '<div class="stack-chart">' +
       data
