@@ -1,78 +1,130 @@
 /**
- * dashboard-data.js — 脱敏演示数据（全部为虚构，仅用于展示看板形态）
- * 不含真实景区名、真实指标数字、内部链接。
+ * dashboard-data.js — 脱敏演示数据
+ * 所有数字均为无意义的整数（100/200/300…），仅用于展示看板形态。
+ * 不含真实景区名、真实指标、内部链接。
  */
 window.DASH_DATA = {
   meta: {
     title: "景区增长数据看板（演示）",
-    note: "演示用脱敏数据 · 数字与景区名均为虚构",
-    channels: ["美团", "携程", "微信"],
-    months: ["5月", "6月"],
-    years: ["2025", "2026"],
+    note: "演示用脱敏数据 · 数字与名称均为虚构",
+    period: "2026 · 5–6 月",
   },
 
-  // 顶部 KPI（模拟，2026 年 5–6 月合计）
+  // ---- KPI（数字为虚构整数）----
   kpi: [
-    { label: "意向 UV", value: 1284000, unit: "", delta: 0.183 },
-    { label: "支付 UV", value: 316000, unit: "", delta: 0.142 },
-    { label: "转化率", value: 0.246, unit: "", delta: -0.012, isRate: true },
-    { label: "GTV", value: 86420000, unit: "元", delta: 0.221 },
+    { label: "意向 UV", value: 200, unit: "万", delta: 0.25, color: "blue" },
+    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "green" },
+    { label: "转化率", value: 0.25, isRate: true, delta: -0.05, color: "amber" },
+    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "pink" },
   ],
 
-  // 各渠道意向 UV（模拟）
+  // ---- 渠道意向 UV（虚构）----
   channelIntent: [
-    { channel: "美团", value: 612000 },
-    { channel: "携程", value: 418000 },
-    { channel: "微信", value: 254000 },
+    { channel: "渠道一", value: 100 },
+    { channel: "渠道二", value: 60 },
+    { channel: "渠道三", value: 40 },
   ],
 
-  // 月度意向 UV 趋势（模拟，同比）
+  // ---- 月度意向同比（虚构）----
   trend: [
-    { month: "5月", y2025: 540000, y2026: 652000 },
-    { month: "6月", y2025: 588000, y2026: 632000 },
+    { month: "5月", last: 80, now: 100 },
+    { month: "6月", last: 90, now: 100 },
   ],
 
-  // 景区列表（父 POI，虚构名称）
+  // ---- 转化漏斗（虚构）----
+  funnel: [
+    { stage: "曝光", value: 500, color: "blue" },
+    { stage: "意向", value: 200, color: "teal" },
+    { stage: "支付", value: 50, color: "green" },
+  ],
+
+  // ---- 每日意向 UV 趋势（虚构，60 天）----
+  daily: (function () {
+    // 固定伪随机，不依赖 Math.random
+    var seed = [12, 7, 5, 9, 11, 6, 8, 10, 7, 13, 9, 6, 8, 11, 7, 9, 10, 8, 12, 7, 9, 6, 11, 8, 10, 9, 7, 12, 8, 9, 10, 6, 8, 11, 7, 9, 10, 8, 6, 9, 11, 7, 8, 10, 9, 6, 8, 11, 7, 9, 10, 8, 6, 9, 11, 7, 8, 10, 9, 6, 8];
+    var out = [];
+    for (var i = 0; i < 60; i++) {
+      out.push({ day: i + 1, value: seed[i] * 1000 });
+    }
+    return out;
+  })(),
+
+  // ---- 景区列表（父，虚构名称 A/B/C/D）----
   scenics: [
     {
       id: "A",
       name: "景区 A",
-      intent: 412000,
-      paid: 98000,
-      gtv: 28400000,
-      delta: 0.205,
-      // 子 POI（虚构）
+      intent: 100,
+      paid: 25,
+      gtv: 200,
+      delta: 0.20,
       children: [
-        { name: "景区 A · 主票", intent: 248000, paid: 62000, gtv: 18200000 },
-        { name: "景区 A · 套票", intent: 98000, paid: 21000, gtv: 6400000 },
-        { name: "景区 A · 增值项目", intent: 66000, paid: 15000, gtv: 3800000 },
+        { name: "景区 A · 主票", intent: 60, paid: 15, gtv: 120 },
+        { name: "景区 A · 套票", intent: 25, paid: 6, gtv: 50 },
+        { name: "景区 A · 增值", intent: 15, paid: 4, gtv: 30 },
       ],
     },
     {
       id: "B",
       name: "景区 B",
-      intent: 358000,
-      paid: 84000,
-      gtv: 21200000,
-      delta: 0.094,
+      intent: 80,
+      paid: 20,
+      gtv: 160,
+      delta: 0.10,
       children: [
-        { name: "景区 B · 主票", intent: 210000, paid: 52000, gtv: 13400000 },
-        { name: "景区 B · 套票", intent: 88000, paid: 19000, gtv: 5200000 },
-        { name: "景区 B · 增值项目", intent: 60000, paid: 13000, gtv: 2600000 },
+        { name: "景区 B · 主票", intent: 50, paid: 12, gtv: 100 },
+        { name: "景区 B · 套票", intent: 20, paid: 5, gtv: 40 },
+        { name: "景区 B · 增值", intent: 10, paid: 3, gtv: 20 },
       ],
     },
     {
       id: "C",
       name: "景区 C",
-      intent: 514000,
-      paid: 134000,
-      gtv: 36800000,
-      delta: 0.268,
+      intent: 120,
+      paid: 30,
+      gtv: 240,
+      delta: 0.30,
       children: [
-        { name: "景区 C · 主票", intent: 312000, paid: 84000, gtv: 23800000 },
-        { name: "景区 C · 套票", intent: 124000, paid: 32000, gtv: 8800000 },
-        { name: "景区 C · 增值项目", intent: 78000, paid: 18000, gtv: 4200000 },
+        { name: "景区 C · 主票", intent: 70, paid: 18, gtv: 140 },
+        { name: "景区 C · 套票", intent: 30, paid: 8, gtv: 60 },
+        { name: "景区 C · 增值", intent: 20, paid: 4, gtv: 40 },
+      ],
+    },
+    {
+      id: "D",
+      name: "景区 D",
+      intent: 60,
+      paid: 15,
+      gtv: 120,
+      delta: -0.08,
+      children: [
+        { name: "景区 D · 主票", intent: 35, paid: 9, gtv: 70 },
+        { name: "景区 D · 套票", intent: 15, paid: 4, gtv: 30 },
+        { name: "景区 D · 增值", intent: 10, paid: 2, gtv: 20 },
       ],
     },
   ],
+
+  // ---- 品类构成（堆叠柱，虚构）----
+  category: [
+    { name: "景区 A", main: 60, extra: 40 },
+    { name: "景区 B", main: 50, extra: 30 },
+    { name: "景区 C", main: 70, extra: 50 },
+    { name: "景区 D", main: 35, extra: 25 },
+  ],
+
+  // 调色板（多色，柔荧光系，与作品集协调）
+  palette: {
+    blue: "#5fa8e6",
+    teal: "#3fb6ad",
+    green: "#5aa86a",
+    amber: "#e0a458",
+    pink: "#e07a9f",
+    purple: "#a07ac9",
+    slate: "#8a96a8",
+    blueSoft: "rgba(95,168,230,0.35)",
+    ink: "#232a35",
+    inkSoft: "#5b6573",
+    line: "rgba(95,168,230,0.14)",
+  },
 };

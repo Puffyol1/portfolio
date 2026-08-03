@@ -26,20 +26,41 @@
 
     <main class="dash-main">
       <div class="dash-main__inner">
-        <h1 class="dash-title" data-dash="title"></h1>
+        <div class="dash-title-row">
+          <h1 class="dash-title" data-dash="title"></h1>
+          <span class="dash-period" data-dash="period"></span>
+        </div>
 
         <!-- KPI -->
         <section class="kpi-grid" aria-label="核心指标" data-dash="kpi"></section>
 
-        <!-- 渠道对比 + 趋势 -->
+        <!-- 漏斗 + 渠道 -->
         <section class="charts">
+          <div class="chart-card">
+            <h2 class="chart-card__title">转化漏斗</h2>
+            <div class="chart-card__body" id="chart-funnel"></div>
+          </div>
           <div class="chart-card">
             <h2 class="chart-card__title">各渠道意向 UV</h2>
             <div class="chart-card__body" id="chart-channel"></div>
           </div>
+        </section>
+
+        <!-- 每日趋势（全宽）-->
+        <section class="chart-card">
+          <h2 class="chart-card__title">每日意向 UV 趋势（60 天）</h2>
+          <div class="chart-card__body" id="chart-daily"></div>
+        </section>
+
+        <!-- 月度同比 + 品类堆叠 -->
+        <section class="charts">
           <div class="chart-card">
             <h2 class="chart-card__title">月度意向 UV 同比</h2>
             <div class="chart-card__body" id="chart-trend"></div>
+          </div>
+          <div class="chart-card">
+            <h2 class="chart-card__title">品类构成（主票 / 增值）</h2>
+            <div class="chart-card__body" id="chart-category"></div>
           </div>
         </section>
 
@@ -47,7 +68,7 @@
         <section class="chart-card chart-card--table">
           <div class="chart-card__head">
             <h2 class="chart-card__title">景区明细（点击行下钻子项）</h2>
-            <span class="chart-card__hint">2026 · 5–6 月合计</span>
+            <span class="chart-card__hint" data-dash="period"></span>
           </div>
           <div class="chart-card__body" id="scenic-table"></div>
         </section>

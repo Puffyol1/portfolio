@@ -1,5 +1,5 @@
 /* ============================================================
-   看板样式 — 复用作品集的乳白浅底 + 浅蓝荧光描边语言
+   看板样式 — 乳白浅底 + 多色柔荧光，丰富的图表形态
    ============================================================ */
 :root {
   --bg: #f7f9fc;
@@ -20,8 +20,16 @@
     "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --font-serif: "Noto Serif SC", "Songti SC", serif;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --c-up: #4a9d72;
+  --c-up: #3d9d6a;
   --c-down: #d97757;
+  /* 多色调色板 */
+  --c-blue: #5fa8e6;
+  --c-teal: #3fb6ad;
+  --c-green: #5aa86a;
+  --c-amber: #e0a458;
+  --c-pink: #e07a9f;
+  --c-purple: #a07ac9;
+  --c-slate: #8a96a8;
 }
 
 *,
@@ -63,7 +71,7 @@ body {
 }
 
 .dash-header__inner {
-  max-width: 1080px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 12px 24px;
   display: flex;
@@ -85,7 +93,7 @@ body {
 
 .dash-note {
   margin: 0;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   color: var(--ink-mute);
   padding: 3px 10px;
   border: 1px solid var(--neon-line);
@@ -99,16 +107,32 @@ body {
 }
 
 .dash-main__inner {
-  max-width: 1080px;
+  max-width: 1120px;
   margin: 0 auto;
 }
 
+.dash-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
 .dash-title {
-  margin: 0 0 28px;
+  margin: 0;
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 600;
   color: var(--ink);
+}
+
+.dash-period {
+  font-size: 0.78rem;
+  color: var(--ink-mute);
+  padding: 3px 10px;
+  border: 1px solid var(--neon-line-soft);
+  border-radius: 999px;
 }
 
 /* ---- KPI ---- */
@@ -120,6 +144,7 @@ body {
 }
 
 .kpi {
+  position: relative;
   padding: 18px 20px;
   background: var(--bg-elev);
   backdrop-filter: blur(10px);
@@ -127,7 +152,22 @@ body {
   border: 1px solid var(--neon-line);
   border-radius: 12px;
   box-shadow: var(--shadow-card);
+  overflow: hidden;
 }
+
+.kpi::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--c-blue);
+}
+
+.kpi[data-color="green"]::before { background: var(--c-green); }
+.kpi[data-color="amber"]::before { background: var(--c-amber); }
+.kpi[data-color="pink"]::before { background: var(--c-pink); }
 
 .kpi__label {
   margin: 0 0 8px;
@@ -138,10 +178,17 @@ body {
 
 .kpi__value {
   margin: 0 0 6px;
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink);
+}
+
+.kpi__unit {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-mute);
+  margin-left: 2px;
 }
 
 .kpi__delta {
@@ -149,18 +196,13 @@ body {
   font-weight: 600;
 }
 
-.kpi__delta.up {
-  color: var(--c-up);
-}
-
-.kpi__delta.down {
-  color: var(--c-down);
-}
+.kpi__delta.up { color: var(--c-up); }
+.kpi__delta.down { color: var(--c-down); }
 
 /* ---- 图表卡片 ---- */
 .charts {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: 1fr 1fr;
   gap: 14px;
   margin-bottom: 24px;
 }
@@ -173,10 +215,11 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow-card);
   padding: 20px;
+  margin-bottom: 24px;
 }
 
-.chart-card--table {
-  margin-bottom: 24px;
+.charts > .chart-card {
+  margin-bottom: 0;
 }
 
 .chart-card__head {
@@ -194,9 +237,7 @@ body {
   color: var(--ink);
 }
 
-.chart-card--table .chart-card__title {
-  margin-bottom: 0;
-}
+.chart-card--table .chart-card__title { margin-bottom: 0; }
 
 .chart-card__hint {
   font-size: 0.76rem;
@@ -207,14 +248,14 @@ body {
   width: 100%;
 }
 
-/* ---- 柱状图 ---- */
+/* ---- 柱状图（多色） ---- */
 .bar-chart {
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
   gap: 16px;
   height: 200px;
-  padding-top: 8px;
+  padding-top: 14px;
 }
 
 .bar-item {
@@ -228,13 +269,8 @@ body {
 }
 
 .bar {
-  width: 60%;
-  max-width: 56px;
-  background: linear-gradient(
-    to top,
-    rgba(var(--neon-rgb), 0.85),
-    rgba(var(--neon-rgb), 0.45)
-  );
+  width: 56%;
+  max-width: 52px;
   border-radius: 6px 6px 0 0;
   position: relative;
   transition: height 0.5s var(--ease);
@@ -256,13 +292,7 @@ body {
   color: var(--ink-soft);
 }
 
-/* ---- 趋势图（SVG） ---- */
-.trend-svg {
-  width: 100%;
-  height: 200px;
-  display: block;
-}
-
+/* ---- 趋势折线（SVG） ---- */
 .trend-legend {
   display: flex;
   gap: 18px;
@@ -282,6 +312,96 @@ body {
   width: 16px;
   height: 3px;
   border-radius: 2px;
+}
+
+.svg-chart {
+  width: 100%;
+  display: block;
+}
+
+/* ---- 漏斗 ---- */
+.funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.funnel__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.funnel__bar {
+  height: 38px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: width 0.5s var(--ease);
+  box-shadow: 0 2px 8px -3px rgba(0, 0, 0, 0.15);
+}
+
+.funnel__label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  min-width: 44px;
+}
+
+.funnel__rate {
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+  min-width: 48px;
+  text-align: right;
+}
+
+/* ---- 堆叠柱 ---- */
+.stack-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 16px;
+  height: 200px;
+  padding-top: 14px;
+}
+
+.stack-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.stack-bar {
+  width: 56%;
+  max-width: 48px;
+  display: flex;
+  flex-direction: column-reverse;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+}
+
+.stack-seg {
+  transition: height 0.5s var(--ease);
+}
+
+.stack__label {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+/* ---- 每日趋势（面积图） ---- */
+.daily-area {
+  width: 100%;
+  height: 180px;
 }
 
 /* ---- 景区表格 ---- */
@@ -342,13 +462,8 @@ body {
   font-size: 0.78rem;
 }
 
-.scenic-row td .delta.up {
-  color: var(--c-up);
-}
-
-.scenic-row td .delta.down {
-  color: var(--c-down);
-}
+.scenic-row td .delta.up { color: var(--c-up); }
+.scenic-row td .delta.down { color: var(--c-down); }
 
 .scenic-child {
   background: rgba(var(--neon-rgb), 0.03);
@@ -400,7 +515,8 @@ body {
   .dash-header__inner {
     padding: 10px 16px;
   }
-  .bar-chart {
+  .bar-chart,
+  .stack-chart {
     height: 160px;
   }
   .scenic-table th,
@@ -411,7 +527,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bar {
+  .bar,
+  .stack-seg,
+  .funnel__bar {
     transition: none;
   }
 }
