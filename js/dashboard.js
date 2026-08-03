@@ -121,7 +121,7 @@
     var wrap = $("#chart-channel");
     if (!wrap) return;
     var data = d.channelIntent;
-    var colors = [P.sand, P.yellow, P.sky];
+    var colors = [P.sand, P.mint, P.yellow];
     var max = Math.max.apply(null, data.map(function (x) { return x.value; }));
     wrap.innerHTML =
       '<div class="bar-chart">' +
