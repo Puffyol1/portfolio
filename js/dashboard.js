@@ -121,7 +121,7 @@
     var wrap = $("#chart-channel");
     if (!wrap) return;
     var data = d.channelIntent;
-    var colors = [P.rose, P.yellow, P.sky];
+    var colors = [P.sand, P.yellow, P.sky];
     var max = Math.max.apply(null, data.map(function (x) { return x.value; }));
     wrap.innerHTML =
       '<div class="bar-chart">' +
@@ -188,11 +188,11 @@
     }).join("");
 
     wrap.innerHTML =
-      '<div class="trend-legend"><span><i style="background:' + P.slate + '"></i>2025</span><span><i style="background:' + P.rose + '"></i>2026</span></div>' +
+      '<div class="trend-legend"><span><i style="background:' + P.slate + '"></i>2025</span><span><i style="background:' + P.sand + '"></i>2026</span></div>' +
       '<svg class="svg-chart" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="xMidYMid meet">' +
       grids +
       '<path d="' + path("last") + '" fill="none" stroke="' + P.slate + '" stroke-width="2" stroke-dasharray="4 4" stroke-linejoin="round"/>' + dots("last", P.slate) +
-      '<path d="' + path("now") + '" fill="none" stroke="' + P.rose + '" stroke-width="2.5" stroke-linejoin="round"/>' + dots("now", P.rose) +
+      '<path d="' + path("now") + '" fill="none" stroke="' + P.sand + '" stroke-width="2.5" stroke-linejoin="round"/>' + dots("now", P.sand) +
       labels("now", P.inkSoft) +
       xLabels +
       "</svg>";
@@ -251,7 +251,7 @@
     if (!wrap) return;
     var data = d.category;
     var max = Math.max.apply(null, data.map(function (x) { return x.main + x.extra; }));
-    var c1 = P.rose,
+    var c1 = P.sand,
       c2 = P.yellow;
     wrap.innerHTML =
       '<div class="stack-chart">' +

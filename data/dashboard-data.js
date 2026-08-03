@@ -12,10 +12,10 @@ window.DASH_DATA = {
 
   // ---- KPI（数字为虚构整数）----
   kpi: [
-    { label: "意向 UV", value: 200, unit: "万", delta: 0.25, color: "rose" },
-    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "sky" },
-    { label: "转化率", value: 0.25, isRate: true, delta: -0.05, color: "yellow" },
-    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "mint" },
+    { label: "意向 UV", value: 200, unit: "万", delta: 0.25, color: "sand" },
+    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "mint" },
+    { label: "转化率", value: 0.25, isRate: true, delta: -0.05, color: "peach" },
+    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "yellow" },
   ],
 
   // ---- 渠道意向 UV（虚构）----
@@ -33,7 +33,7 @@ window.DASH_DATA = {
 
   // ---- 转化漏斗（虚构）----
   funnel: [
-    { stage: "曝光", value: 500, color: "rose" },
+    { stage: "曝光", value: 500, color: "sand" },
     { stage: "意向", value: 200, color: "peach" },
     { stage: "支付", value: 50, color: "yellow" },
   ],
@@ -122,7 +122,7 @@ window.DASH_DATA = {
     amber: "#ff9f2e",
     yellow: "#ffd23f",
     pink: "#ff5fa8",
-    rose: "#ff9ec7",
+    sand: "#c9a87c",
     peach: "#ffb3a0",
     mint: "#8be9c8",
     purple: "#9b5cff",
