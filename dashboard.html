@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>景区增长数据看板（演示） · 计奕佳</title>
+    <title>景区经营数据看板（演示） · 计奕佳</title>
     <meta
       name="description"
-      content="脱敏演示看板 — 展示看板形态与搭建能力，数据均为虚构。"
+      content="脱敏演示看板 — 复刻企业看板的信息层级与配色，数据均为虚构。"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,52 +26,49 @@
 
     <main class="dash-main">
       <div class="dash-main__inner">
-        <div class="dash-title-row">
-          <h1 class="dash-title" data-dash="title"></h1>
-          <span class="dash-period" data-dash="period"></span>
-        </div>
+        <!-- 大卡片容器 -->
+        <article class="board">
+          <!-- 顶部横向概览 -->
+          <section class="board__overview" aria-label="概览">
+            <div class="board__title-row">
+              <h1 class="board__title" data-dash="title"></h1>
+              <p class="board__subtitle" data-dash="subtitle"></p>
+            </div>
+            <div class="overview" data-dash="overview"></div>
+          </section>
 
-        <!-- KPI -->
-        <section class="kpi-grid" aria-label="核心指标" data-dash="kpi"></section>
+          <div class="board__body">
+            <!-- 左栏 -->
+            <div class="board__col board__col--left">
+              <section class="panel" aria-label="AOI指标表">
+                <h2 class="panel__title" data-aoi="title"></h2>
+                <div class="panel__body" id="aoi-table"></div>
+              </section>
+              <section class="panel" aria-label="GTV拆分">
+                <h2 class="panel__title" data-gtv="title"></h2>
+                <div class="panel__body" id="gtv-chart"></div>
+              </section>
+            </div>
 
-        <!-- 漏斗 + 渠道 -->
-        <section class="charts">
-          <div class="chart-card">
-            <h2 class="chart-card__title">转化漏斗</h2>
-            <div class="chart-card__body" id="chart-funnel"></div>
+            <!-- 右栏 -->
+            <div class="board__col board__col--right">
+              <section class="panel" aria-label="指标速览">
+                <h2 class="panel__title" data-kpi="title"></h2>
+                <div class="panel__body" id="kpi-cards"></div>
+              </section>
+              <section class="panel" aria-label="同比分析">
+                <h2 class="panel__title" data-compare="title"></h2>
+                <div class="panel__body" id="compare-chart"></div>
+              </section>
+            </div>
           </div>
-          <div class="chart-card">
-            <h2 class="chart-card__title">各渠道意向 UV</h2>
-            <div class="chart-card__body" id="chart-channel"></div>
-          </div>
-        </section>
 
-        <!-- 每日趋势（全宽）-->
-        <section class="chart-card">
-          <h2 class="chart-card__title">每日意向 UV 趋势（60 天）</h2>
-          <div class="chart-card__body" id="chart-daily"></div>
-        </section>
-
-        <!-- 月度同比 + 品类堆叠 -->
-        <section class="charts">
-          <div class="chart-card">
-            <h2 class="chart-card__title">月度意向 UV 同比</h2>
-            <div class="chart-card__body" id="chart-trend"></div>
-          </div>
-          <div class="chart-card">
-            <h2 class="chart-card__title">品类构成（主票 / 增值）</h2>
-            <div class="chart-card__body" id="chart-category"></div>
-          </div>
-        </section>
-
-        <!-- 景区表格（可下钻） -->
-        <section class="chart-card chart-card--table">
-          <div class="chart-card__head">
-            <h2 class="chart-card__title">景区明细（点击行下钻子项）</h2>
-            <span class="chart-card__hint" data-dash="period"></span>
-          </div>
-          <div class="chart-card__body" id="scenic-table"></div>
-        </section>
+          <!-- 底部关键结论 -->
+          <section class="board__conclusions" aria-label="关键结论">
+            <h2 class="panel__title">关键结论</h2>
+            <div class="conclusions" data-dash="conclusions"></div>
+          </section>
+        </article>
       </div>
     </main>
 

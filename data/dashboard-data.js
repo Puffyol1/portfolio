@@ -1,140 +1,94 @@
 /**
- * dashboard-data.js — 脱敏演示数据
- * 所有数字均为无意义的整数（100/200/300…），仅用于展示看板形态。
- * 不含真实景区名、真实指标、内部链接。
+ * dashboard-data.js — 脱敏演示数据（景区经营数据看板）
+ * 全部为虚构，仅复刻信息层级与配色，不含真实景区名/真实指标/内部链接。
  */
 window.DASH_DATA = {
   meta: {
-    title: "景区增长数据看板（演示）",
+    title: "景区经营数据",
+    subtitle: "2025 vs 2026 · 演示脱敏数据",
     note: "演示用脱敏数据 · 数字与名称均为虚构",
-    period: "2026 · 5–6 月",
   },
 
-  // ---- KPI（数字为虚构整数）----
-  kpi: [
-    { label: "意向 UV", value: 200, unit: "万", delta: 0.25, color: "red" },
-    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "orange" },
-    { label: "转化率", value: 0.25, isRate: true, delta: -0.05, color: "yellow" },
-    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "green" },
+  // ---- 顶部横向概览 ----
+  overview: [
+    { label: "总 GTV", value: 800, unit: "万", delta: 0.22 },
+    { label: "意向 UV", value: 200, unit: "万", delta: 0.18 },
+    { label: "支付 UV", value: 50, unit: "万", delta: 0.12 },
+    { label: "转化率", value: 0.25, isRate: true, delta: -0.05 },
+    { label: "客单价", value: 160, unit: "元", delta: 0.08 },
   ],
 
-  // ---- 渠道意向 UV（虚构）----
-  channelIntent: [
-    { channel: "渠道一", value: 100 },
-    { channel: "渠道二", value: 85 },
-    { channel: "渠道三", value: 70 },
-    { channel: "渠道四", value: 60 },
-    { channel: "渠道五", value: 45 },
-    { channel: "渠道六", value: 35 },
-    { channel: "渠道七", value: 25 },
+  // ---- 左侧：AOI 核心指标表（2025 vs 2026）----
+  aoiTable: {
+    title: "AOI 核心指标（2025 vs 2026）",
+    columns: ["指标", "2025", "2026", "同比"],
+    rows: [
+      { metric: "曝光 UV", last: 500, now: 620, unit: "万" },
+      { metric: "意向 UV", last: 160, now: 200, unit: "万" },
+      { metric: "点击 UV", last: 90, now: 110, unit: "万" },
+      { metric: "支付 UV", last: 42, now: 50, unit: "万" },
+      { metric: "GTV", last: 650, now: 800, unit: "万" },
+      { metric: "转化率", last: 0.26, now: 0.25, isRate: true },
+      { metric: "客单价", last: 148, now: 160, unit: "元" },
+      { metric: "退单率", last: 0.04, now: 0.03, isRate: true },
+    ],
+  },
+
+  // ---- 左侧：GTV 结构拆分（柱状图）----
+  gtvBreakdown: {
+    title: "GTV 结构拆分",
+    bars: [
+      { name: "主票", value: 400, color: "blue" },
+      { name: "套票", value: 220, color: "yellow" },
+      { name: "增值", value: 120, color: "purple" },
+      { name: "其他", value: 60, color: "green" },
+    ],
+  },
+
+  // ---- 右侧：指标卡排行榜 ----
+  kpiCards: {
+    title: "指标速览",
+    items: [
+      { label: "主票 GTV", value: 400, unit: "万", trend: "up" },
+      { label: "套票 GTV", value: 220, unit: "万", trend: "up" },
+      { label: "增值 GTV", value: 120, unit: "万", trend: "up" },
+      { label: "退单率", value: 0.03, isRate: true, trend: "good-down" },
+      { label: "低分景区数", value: 2, unit: "个", trend: "watch" },
+    ],
+  },
+
+  // ---- 右侧：核心指标同比分组柱状图 ----
+  compare: {
+    title: "核心指标同比分析",
+    groups: [
+      { name: "曝光", last: 500, now: 620 },
+      { name: "意向", last: 160, now: 200 },
+      { name: "点击", last: 90, now: 110 },
+      { name: "支付", last: 42, now: 50 },
+    ],
+    legend: ["2025", "2026"],
+  },
+
+  // ---- 底部：关键结论 ----
+  conclusions: [
+    { type: "pos", text: "总 GTV 同比 +22%，增长主要由套票拉动" },
+    { type: "pos", text: "支付 UV 与意向 UV 双增，转化漏斗健康" },
+    { type: "warn", text: "转化率同比 -5%，需关注支付环节流失" },
+    { type: "neg", text: "低分景区 2 个，需重点治理信息质量" },
   ],
 
-  // ---- 月度意向同比（虚构）----
-  trend: [
-    { month: "5月", last: 80, now: 100 },
-    { month: "6月", last: 90, now: 100 },
-  ],
-
-  // ---- 转化漏斗（虚构）----
-  funnel: [
-    { stage: "曝光", value: 500, color: "red" },
-    { stage: "意向", value: 200, color: "orange" },
-    { stage: "支付", value: 50, color: "yellow" },
-  ],
-
-  // ---- 每日意向 UV 趋势（虚构，60 天）----
-  daily: (function () {
-    // 固定伪随机，不依赖 Math.random
-    var seed = [12, 7, 5, 9, 11, 6, 8, 10, 7, 13, 9, 6, 8, 11, 7, 9, 10, 8, 12, 7, 9, 6, 11, 8, 10, 9, 7, 12, 8, 9, 10, 6, 8, 11, 7, 9, 10, 8, 6, 9, 11, 7, 8, 10, 9, 6, 8, 11, 7, 9, 10, 8, 6, 9, 11, 7, 8, 10, 9, 6, 8];
-    var out = [];
-    for (var i = 0; i < 60; i++) {
-      out.push({ day: i + 1, value: seed[i] * 1000 });
-    }
-    return out;
-  })(),
-
-  // ---- 景区列表（父，虚构名称 A/B/C/D）----
-  scenics: [
-    {
-      id: "A",
-      name: "景区 A",
-      intent: 100,
-      paid: 25,
-      gtv: 200,
-      delta: 0.20,
-      children: [
-        { name: "景区 A · 主票", intent: 60, paid: 15, gtv: 120 },
-        { name: "景区 A · 套票", intent: 25, paid: 6, gtv: 50 },
-        { name: "景区 A · 增值", intent: 15, paid: 4, gtv: 30 },
-      ],
-    },
-    {
-      id: "B",
-      name: "景区 B",
-      intent: 80,
-      paid: 20,
-      gtv: 160,
-      delta: 0.10,
-      children: [
-        { name: "景区 B · 主票", intent: 50, paid: 12, gtv: 100 },
-        { name: "景区 B · 套票", intent: 20, paid: 5, gtv: 40 },
-        { name: "景区 B · 增值", intent: 10, paid: 3, gtv: 20 },
-      ],
-    },
-    {
-      id: "C",
-      name: "景区 C",
-      intent: 120,
-      paid: 30,
-      gtv: 240,
-      delta: 0.30,
-      children: [
-        { name: "景区 C · 主票", intent: 70, paid: 18, gtv: 140 },
-        { name: "景区 C · 套票", intent: 30, paid: 8, gtv: 60 },
-        { name: "景区 C · 增值", intent: 20, paid: 4, gtv: 40 },
-      ],
-    },
-    {
-      id: "D",
-      name: "景区 D",
-      intent: 60,
-      paid: 15,
-      gtv: 120,
-      delta: -0.08,
-      children: [
-        { name: "景区 D · 主票", intent: 35, paid: 9, gtv: 70 },
-        { name: "景区 D · 套票", intent: 15, paid: 4, gtv: 30 },
-        { name: "景区 D · 增值", intent: 10, paid: 2, gtv: 20 },
-      ],
-    },
-  ],
-
-  // ---- 品类构成（堆叠柱，虚构）----
-  category: [
-    { name: "景区 A", main: 60, extra: 40 },
-    { name: "景区 B", main: 50, extra: 30 },
-    { name: "景区 C", main: 70, extra: 50 },
-    { name: "景区 D", main: 35, extra: 25 },
-  ],
-
-  // 调色板（彩虹色，按色相排列）
+  // 调色板
   palette: {
-    red: "#ff5a5a",
-    orange: "#ff9f2e",
-    yellow: "#ffd23f",
-    green: "#18c96f",
-    cyan: "#06c4d4",
-    blue: "#4f7cff",
-    purple: "#9b5cff",
-    // 辅助
-    mint: "#8be9c8",
-    peach: "#ffb3a0",
-    sand: "#c9a87c",
-    slate: "#6b7390",
-    ink: "#1a1f2e",
-    inkSoft: "#4a5366",
-    line: "rgba(79,124,255,0.12)",
-    // 彩虹序列（用于柱状图等多色场景）
-    rainbow: ["#ff5a5a", "#ff9f2e", "#ffd23f", "#18c96f", "#06c4d4", "#4f7cff", "#9b5cff"],
+    blue: "#3b82f6",
+    green: "#10b981",
+    yellow: "#f5c518",
+    purple: "#8b5cf6",
+    red: "#ef4444",
+    orange: "#f59e0b",
+    slate: "#64748b",
+    ink: "#1f2937",
+    inkSoft: "#475569",
+    inkMute: "#94a3b8",
+    line: "#eef1f5",
   },
 };
