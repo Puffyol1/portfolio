@@ -121,7 +121,7 @@
     var wrap = $("#chart-channel");
     if (!wrap) return;
     var data = d.channelIntent;
-    var colors = [P.blue, P.purple, P.teal];
+    var colors = [P.blue, P.sky, P.yellow];
     var max = Math.max.apply(null, data.map(function (x) { return x.value; }));
     wrap.innerHTML =
       '<div class="bar-chart">' +
@@ -231,8 +231,8 @@
     // 渐变定义
     var grad =
       '<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">' +
-      '<stop offset="0%" stop-color="' + P.blue + '" stop-opacity="0.35"/>' +
-      '<stop offset="100%" stop-color="' + P.blue + '" stop-opacity="0.02"/>' +
+      '<stop offset="0%" stop-color="' + P.sky + '" stop-opacity="0.45"/>' +
+      '<stop offset="100%" stop-color="' + P.sky + '" stop-opacity="0.02"/>' +
       "</linearGradient></defs>";
 
     wrap.innerHTML =
@@ -240,7 +240,7 @@
       grad +
       grids +
       '<path d="' + area + '" fill="url(#areaGrad)"/>' +
-      '<path d="' + line + '" fill="none" stroke="' + P.blue + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<path d="' + line + '" fill="none" stroke="' + P.sky + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
       xTicks +
       "</svg>";
   }
@@ -251,8 +251,8 @@
     if (!wrap) return;
     var data = d.category;
     var max = Math.max.apply(null, data.map(function (x) { return x.main + x.extra; }));
-    var c1 = P.blue,
-      c2 = P.purple;
+    var c1 = P.sky,
+      c2 = P.amber;
     wrap.innerHTML =
       '<div class="stack-chart">' +
       data
