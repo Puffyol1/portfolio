@@ -591,6 +591,19 @@ h3 {
   border-radius: 999px;
 }
 
+.project-card__demo {
+  display: inline-block;
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--neon);
+  transition: color 0.18s var(--ease), text-shadow 0.18s var(--ease);
+}
+
+.project-card__demo:hover {
+  color: var(--ink);
+}
+
 .project-card__summary {
   margin: 0;
   color: var(--ink-soft);

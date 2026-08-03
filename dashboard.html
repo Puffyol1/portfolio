@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>景区增长数据看板（演示） · 计奕佳</title>
+    <meta
+      name="description"
+      content="脱敏演示看板 — 展示看板形态与搭建能力，数据均为虚构。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <header class="dash-header">
+      <div class="dash-header__inner">
+        <a class="dash-back" href="index.html#projects">← 返回作品集</a>
+        <p class="dash-note" data-dash="note"></p>
+      </div>
+    </header>
+
+    <main class="dash-main">
+      <div class="dash-main__inner">
+        <h1 class="dash-title" data-dash="title"></h1>
+
+        <!-- KPI -->
+        <section class="kpi-grid" aria-label="核心指标" data-dash="kpi"></section>
+
+        <!-- 渠道对比 + 趋势 -->
+        <section class="charts">
+          <div class="chart-card">
+            <h2 class="chart-card__title">各渠道意向 UV</h2>
+            <div class="chart-card__body" id="chart-channel"></div>
+          </div>
+          <div class="chart-card">
+            <h2 class="chart-card__title">月度意向 UV 同比</h2>
+            <div class="chart-card__body" id="chart-trend"></div>
+          </div>
+        </section>
+
+        <!-- 景区表格（可下钻） -->
+        <section class="chart-card chart-card--table">
+          <div class="chart-card__head">
+            <h2 class="chart-card__title">景区明细（点击行下钻子项）</h2>
+            <span class="chart-card__hint">2026 · 5–6 月合计</span>
+          </div>
+          <div class="chart-card__body" id="scenic-table"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="dash-footer">
+      <p>演示用脱敏数据 · © 计奕佳</p>
+    </footer>
+
+    <script src="data/dashboard-data.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
