@@ -469,6 +469,28 @@ body {
 .conclusion.neg::before { background: var(--red); }
 
 /* ---- 页脚 ---- */
+.dash-switch {
+  text-align: center;
+  margin: 20px 0 0;
+}
+
+.dash-switch a {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blue);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.dash-switch a:hover {
+  border-color: var(--yellow);
+  background: var(--yellow-soft);
+}
+
 .dash-footer {
   padding: 28px 0;
   text-align: center;
