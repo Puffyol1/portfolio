@@ -29,6 +29,9 @@
   --c-amber: #ff9f2e;
   --c-yellow: #ffd23f;
   --c-pink: #ff5fa8;
+  --c-rose: #ff9ec7;
+  --c-peach: #ffb3a0;
+  --c-mint: #8be9c8;
   --c-purple: #9b5cff;
   --c-slate: #6b7390;
 }
@@ -170,6 +173,9 @@ body {
 .kpi[data-color="amber"]::before { background: var(--c-amber); }
 .kpi[data-color="yellow"]::before { background: var(--c-yellow); }
 .kpi[data-color="pink"]::before { background: var(--c-pink); }
+.kpi[data-color="rose"]::before { background: var(--c-rose); }
+.kpi[data-color="peach"]::before { background: var(--c-peach); }
+.kpi[data-color="mint"]::before { background: var(--c-mint); }
 .kpi[data-color="purple"]::before { background: var(--c-purple); }
 
 .kpi__label {

@@ -121,7 +121,7 @@
     var wrap = $("#chart-channel");
     if (!wrap) return;
     var data = d.channelIntent;
-    var colors = [P.blue, P.sky, P.yellow];
+    var colors = [P.rose, P.yellow, P.sky];
     var max = Math.max.apply(null, data.map(function (x) { return x.value; }));
     wrap.innerHTML =
       '<div class="bar-chart">' +
@@ -188,11 +188,11 @@
     }).join("");
 
     wrap.innerHTML =
-      '<div class="trend-legend"><span><i style="background:' + P.slate + '"></i>2025</span><span><i style="background:' + P.blue + '"></i>2026</span></div>' +
+      '<div class="trend-legend"><span><i style="background:' + P.slate + '"></i>2025</span><span><i style="background:' + P.rose + '"></i>2026</span></div>' +
       '<svg class="svg-chart" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="xMidYMid meet">' +
       grids +
       '<path d="' + path("last") + '" fill="none" stroke="' + P.slate + '" stroke-width="2" stroke-dasharray="4 4" stroke-linejoin="round"/>' + dots("last", P.slate) +
-      '<path d="' + path("now") + '" fill="none" stroke="' + P.blue + '" stroke-width="2.5" stroke-linejoin="round"/>' + dots("now", P.blue) +
+      '<path d="' + path("now") + '" fill="none" stroke="' + P.rose + '" stroke-width="2.5" stroke-linejoin="round"/>' + dots("now", P.rose) +
       labels("now", P.inkSoft) +
       xLabels +
       "</svg>";
@@ -231,8 +231,8 @@
     // 渐变定义
     var grad =
       '<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">' +
-      '<stop offset="0%" stop-color="' + P.sky + '" stop-opacity="0.45"/>' +
-      '<stop offset="100%" stop-color="' + P.sky + '" stop-opacity="0.02"/>' +
+      '<stop offset="0%" stop-color="' + P.mint + '" stop-opacity="0.5"/>' +
+      '<stop offset="100%" stop-color="' + P.mint + '" stop-opacity="0.02"/>' +
       "</linearGradient></defs>";
 
     wrap.innerHTML =
@@ -240,7 +240,7 @@
       grad +
       grids +
       '<path d="' + area + '" fill="url(#areaGrad)"/>' +
-      '<path d="' + line + '" fill="none" stroke="' + P.sky + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<path d="' + line + '" fill="none" stroke="' + P.mint + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
       xTicks +
       "</svg>";
   }
@@ -251,8 +251,8 @@
     if (!wrap) return;
     var data = d.category;
     var max = Math.max.apply(null, data.map(function (x) { return x.main + x.extra; }));
-    var c1 = P.sky,
-      c2 = P.amber;
+    var c1 = P.rose,
+      c2 = P.yellow;
     wrap.innerHTML =
       '<div class="stack-chart">' +
       data
