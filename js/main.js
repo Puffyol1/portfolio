@@ -145,6 +145,9 @@
           '<h3 class="project-card__title">' +
           esc(p.title) +
           "</h3>" +
+          (p.note
+            ? '<p class="project-card__note">' + esc(p.note) + "</p>"
+            : "") +
           '<p class="project-card__summary">' +
           esc(p.summary) +
           "</p>" +
