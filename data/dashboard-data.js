@@ -12,17 +12,21 @@ window.DASH_DATA = {
 
   // ---- KPI（数字为虚构整数）----
   kpi: [
-    { label: "意向 UV", value: 200, unit: "万", delta: 0.25, color: "sand" },
-    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "mint" },
-    { label: "转化率", value: 0.25, isRate: true, delta: -0.05, color: "peach" },
-    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "yellow" },
+    { label: "意向 UV", value: 200, unit: "万", delta: 0.25, color: "red" },
+    { label: "支付 UV", value: 50, unit: "万", delta: 0.12, color: "orange" },
+    { label: "转化率", value: 0.25, isRate: true, delta: -0.05, color: "yellow" },
+    { label: "GTV", value: 800, unit: "万", delta: 0.30, color: "green" },
   ],
 
   // ---- 渠道意向 UV（虚构）----
   channelIntent: [
     { channel: "渠道一", value: 100 },
-    { channel: "渠道二", value: 60 },
-    { channel: "渠道三", value: 40 },
+    { channel: "渠道二", value: 85 },
+    { channel: "渠道三", value: 70 },
+    { channel: "渠道四", value: 60 },
+    { channel: "渠道五", value: 45 },
+    { channel: "渠道六", value: 35 },
+    { channel: "渠道七", value: 25 },
   ],
 
   // ---- 月度意向同比（虚构）----
@@ -33,8 +37,8 @@ window.DASH_DATA = {
 
   // ---- 转化漏斗（虚构）----
   funnel: [
-    { stage: "曝光", value: 500, color: "sand" },
-    { stage: "意向", value: 200, color: "peach" },
+    { stage: "曝光", value: 500, color: "red" },
+    { stage: "意向", value: 200, color: "orange" },
     { stage: "支付", value: 50, color: "yellow" },
   ],
 
@@ -113,22 +117,24 @@ window.DASH_DATA = {
     { name: "景区 D", main: 35, extra: 25 },
   ],
 
-  // 调色板（鲜亮多彩，偏暖偏淡）
+  // 调色板（彩虹色，按色相排列）
   palette: {
-    blue: "#4f7cff",
-    sky: "#5ac8ff",
-    teal: "#06c4d4",
-    green: "#18c96f",
-    amber: "#ff9f2e",
+    red: "#ff5a5a",
+    orange: "#ff9f2e",
     yellow: "#ffd23f",
-    pink: "#ff5fa8",
-    sand: "#c9a87c",
-    peach: "#ffb3a0",
-    mint: "#8be9c8",
+    green: "#18c96f",
+    cyan: "#06c4d4",
+    blue: "#4f7cff",
     purple: "#9b5cff",
+    // 辅助
+    mint: "#8be9c8",
+    peach: "#ffb3a0",
+    sand: "#c9a87c",
     slate: "#6b7390",
     ink: "#1a1f2e",
     inkSoft: "#4a5366",
     line: "rgba(79,124,255,0.12)",
+    // 彩虹序列（用于柱状图等多色场景）
+    rainbow: ["#ff5a5a", "#ff9f2e", "#ffd23f", "#18c96f", "#06c4d4", "#4f7cff", "#9b5cff"],
   },
 };
