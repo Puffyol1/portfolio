@@ -1082,11 +1082,20 @@ h3 {
    ============================================================ */
 @media (max-width: 640px) {
   .nav {
-    padding: 12px 20px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 6px;
+  }
+  .nav__logo {
+    width: 100%;
+    text-align: center;
   }
   .nav__links {
-    gap: 16px;
-    font-size: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 14px;
+    font-size: 0.76rem;
   }
   .section {
     padding: 64px 0;
