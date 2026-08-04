@@ -1099,8 +1099,16 @@ h3 {
     padding: 60px 20px 48px;
   }
   .hero__name-en {
-    font-size: clamp(4rem, 26vw, 7rem);
+    font-size: clamp(3rem, 22vw, 5.5rem);
     -webkit-text-stroke-width: 1px;
+  }
+  .hero__name-wrap {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  .hero__name {
+    text-align: center;
   }
   .hero__cta {
     flex-direction: column;
