@@ -151,12 +151,7 @@
           (p.demo
             ? '<a class="project-card__demo" href="' +
               esc(p.demo) +
-              '">查看演示看板（企业风格） →</a>'
-            : "") +
-          (p.demo2
-            ? '<a class="project-card__demo" href="' +
-              esc(p.demo2) +
-              '" style="margin-left:14px">查看演示看板（彩虹风格） →</a>'
+              '">查看脱敏演示看板 →</a>'
             : "") +
           '<p class="project-card__summary">' +
           esc(p.summary) +
