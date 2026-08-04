@@ -368,24 +368,121 @@ h3 {
 .edu {
   display: grid;
   gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.edu li {
-  padding: 20px 22px;
+.edu-item {
+  padding: 0;
   background: var(--bg-elev);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--neon-line);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
-  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease),
-    box-shadow 0.25s var(--ease);
+  overflow: hidden;
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
-.edu li:hover {
+.edu-item.is-open,
+.edu-item:hover {
   border-color: var(--neon-line-strong);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-card), var(--glow-sm);
+}
+
+.edu-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 20px 22px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.edu-head--plain {
+  cursor: default;
+}
+
+.edu-head__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-caret {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--neon-line-strong);
+  color: var(--neon);
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease);
+}
+
+.edu-item.is-open .edu-caret {
+  transform: rotate(45deg);
+  border-color: var(--neon);
+}
+
+.edu-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease);
+}
+
+.edu-detail.is-open {
+  /* 展开后由 JS 设 maxHeight */
+}
+
+.edu-detail__inner {
+  padding: 4px 22px 22px;
+  border-top: 1px solid var(--neon-line-soft);
+}
+
+.edu-gpa {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 16px 0 0;
+}
+
+.edu-gpa__label {
+  font-size: 0.74rem;
+  color: var(--ink-mute);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.edu-gpa__val {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.edu-courses {
+  display: grid;
+  gap: 14px;
+}
+
+.edu-courses__label {
+  margin: 0 0 8px;
+  font-size: 0.74rem;
+  color: var(--neon);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .edu .school {
@@ -659,6 +756,137 @@ h3 {
 }
 
 .project-card__body-inner dd {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   学术项目
+   ============================================================ */
+.academic {
+  display: grid;
+  gap: 16px;
+}
+
+.academic-card {
+  background: var(--bg-elev);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--neon-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.academic-card:hover {
+  border-color: var(--neon-line-strong);
+  box-shadow: var(--shadow-card), var(--glow-sm);
+  transform: translateY(-2px);
+}
+
+.academic-card__head {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.academic-card__titles {
+  flex: 1;
+}
+
+.academic-card__period {
+  margin: 0 0 6px;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--neon);
+  font-weight: 600;
+}
+
+.academic-card__title {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.academic-card__honor {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 3px 12px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--neon);
+  background: var(--neon-tint);
+  border: 1px solid var(--neon-line);
+  border-radius: 999px;
+}
+
+.academic-card__summary {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--fs-small);
+}
+
+.academic-card__icon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--neon-line-strong);
+  color: var(--neon);
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.academic-card__head:hover .academic-card__icon {
+  border-color: var(--neon);
+  box-shadow: var(--glow-sm);
+}
+
+.academic-card[aria-expanded="true"] .academic-card__icon {
+  transform: rotate(45deg);
+  border-color: var(--neon);
+  box-shadow: var(--glow-sm);
+}
+
+.academic-card__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease);
+}
+
+.academic-card__body-inner {
+  padding: 0 24px 22px;
+  border-top: 1px solid var(--neon-line-soft);
+}
+
+.academic-card__body-inner dt {
+  margin: 16px 0 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neon);
+  font-weight: 600;
+}
+
+.academic-card__body-inner dd {
   margin: 0;
   color: var(--ink-soft);
 }

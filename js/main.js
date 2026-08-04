@@ -42,7 +42,7 @@
         } else if (c.hero[key] != null) {
           el.textContent = c.hero[key];
         }
-      } else if (c[dataKey] && c[dataKey][key] != null) {
+      } else if (c[dataKey] && typeof c[dataKey][key] === "string") {
         el.textContent = c[dataKey][key];
       }
     });
@@ -56,22 +56,64 @@
     var edu = $("[data-about='education']", root);
     if (edu) {
       edu.innerHTML = c.about.education
-        .map(function (e) {
-          return (
-            "<li>" +
-            '<p class="school">' +
-            esc(e.school) +
-            "</p>" +
-            '<p class="degree">' +
-            esc(e.degree) +
-            "</p>" +
-            '<p class="note">' +
-            esc(e.note) +
-            "</p>" +
-            "</li>"
-          );
+        .map(function (e, idx) {
+          var hasDetail = !!e.detail;
+          var head =
+            "<li" + (hasDetail ? ' class="edu-item edu-item--expandable"' : ' class="edu-item"') + ">" +
+            (hasDetail
+              ? '<button class="edu-head" type="button" aria-expanded="false" aria-controls="edu-detail-' + idx + '" id="edu-head-' + idx + '">'
+              : '<div class="edu-head edu-head--plain">') +
+            '<span class="edu-head__main">' +
+              '<span class="school">' + esc(e.school) + "</span>" +
+              '<span class="degree">' + esc(e.degree) + "</span>" +
+              '<span class="note">' + esc(e.note) + "</span>" +
+            "</span>" +
+            (hasDetail ? '<span class="edu-caret" aria-hidden="true">+</span>' : "") +
+            (hasDetail ? "</button>" : "</div>");
+
+          var detail = "";
+          if (hasDetail) {
+            var det = e.detail;
+            // 课程分组
+            var groups = "";
+            Object.keys(det.courses).forEach(function (groupName) {
+              var tags = det.courses[groupName]
+                .map(function (k) { return "<li>" + esc(k) + "</li>"; })
+                .join("");
+              groups +=
+                '<div class="edu-courses__group">' +
+                '<p class="edu-courses__label">' + esc(groupName) + "</p>" +
+                '<ul class="tags">' + tags + "</ul>" +
+                "</div>";
+            });
+
+            detail =
+              '<div class="edu-detail" id="edu-detail-' + idx + '" role="region" aria-labelledby="edu-head-' + idx + '" hidden>' +
+              '<div class="edu-detail__inner">' +
+              '<p class="edu-gpa"><span class="edu-gpa__label">平均分</span><span class="edu-gpa__val">' + esc(det.gpa) + "</span></p>" +
+              '<p class="subheading" style="margin-top:14px">修读课程</p>' +
+              '<div class="edu-courses">' + groups + "</div>" +
+              "</div>" +
+              "</div>";
+          }
+
+          return head + detail + "</li>";
         })
         .join("");
+
+      // 绑定教育下钻
+      $$(".edu-head", edu).forEach(function (btn) {
+        if (btn.tagName !== "BUTTON") return;
+        btn.addEventListener("click", function () {
+          var open = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", String(!open));
+          var detail = btn.parentElement.querySelector(".edu-detail");
+          if (detail) {
+            detail.hidden = open;
+            btn.parentElement.classList.toggle("is-open", !open);
+          }
+        });
+      });
     }
 
     var kw = $("[data-about='keywords']", root);
@@ -82,6 +124,63 @@
         })
         .join("");
     }
+  }
+
+  // ---- 渲染：学术项目（可展开）----
+  function renderAcademic() {
+    var root = $("#academic");
+    if (!root) return;
+    fill(root, "academic");
+
+    var wrap = $("[data-academic='items']", root);
+    if (!wrap) return;
+
+    wrap.innerHTML = c.academicProjects.items
+      .map(function (p, i) {
+        return (
+          '<article class="academic-card" data-index="' + i + '">' +
+          '<button class="academic-card__head" type="button" ' +
+          'aria-expanded="false" aria-controls="aca-body-' + i + '" id="aca-head-' + i + '">' +
+          '<span class="academic-card__titles">' +
+          '<p class="academic-card__period">' + esc(p.period) + "</p>" +
+          '<h3 class="academic-card__title">' + esc(p.title) + "</h3>" +
+          (p.honor ? '<p class="academic-card__honor">' + esc(p.honor) + "</p>" : "") +
+          '<p class="academic-card__summary">' + esc(p.summary) + "</p>" +
+          "</span>" +
+          '<span class="academic-card__icon" aria-hidden="true">+</span>' +
+          "</button>" +
+          '<div class="academic-card__body" id="aca-body-' + i + '" role="region" aria-labelledby="aca-head-' + i + '">' +
+          '<dl class="academic-card__body-inner">' +
+          "<dt>背景</dt><dd>" + esc(p.background) + "</dd>" +
+          "<dt>做法</dt><dd>" + esc(p.approach) + "</dd>" +
+          "<dt>收获</dt><dd>" + esc(p.takeaway) + "</dd>" +
+          "</dl>" +
+          "</div>" +
+          "</article>"
+        );
+      })
+      .join("");
+
+    // 绑定展开/收起（复用项目卡片逻辑）
+    $$(".academic-card", wrap).forEach(function (card) {
+      var btn = $(".academic-card__head", card);
+      var body = $(".academic-card__body", card);
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        if (open) {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(function () { body.style.maxHeight = "0px"; });
+          btn.setAttribute("aria-expanded", "false");
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true");
+          body.addEventListener("transitionend", function onEnd() {
+            if (btn.getAttribute("aria-expanded") === "true") body.style.maxHeight = "none";
+            body.removeEventListener("transitionend", onEnd);
+          });
+        }
+      });
+    });
   }
 
   // ---- 渲染：经历时间线 ----
@@ -325,6 +424,7 @@
     renderAbout();
     renderExperience();
     renderProjects();
+    renderAcademic();
     renderSkills();
     renderContact();
     renderFooter();
