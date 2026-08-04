@@ -62,11 +62,25 @@ window.DASH_DATA = {
       paid: 25,
       gtv: 200,
       delta: 0.20,
-      children: [
-        { name: "景区 A · 主票", intent: 60, paid: 15, gtv: 120 },
-        { name: "景区 A · 套票", intent: 25, paid: 6, gtv: 50 },
-        { name: "景区 A · 增值", intent: 15, paid: 4, gtv: 30 },
-      ],
+      detail: {
+        aoi: [
+          { metric: "曝光 UV", last: 120, now: 150, unit: "万" },
+          { metric: "意向 UV", last: 80, now: 100, unit: "万" },
+          { metric: "支付 UV", last: 20, now: 25, unit: "万" },
+          { metric: "GTV", last: 160, now: 200, unit: "万" },
+          { metric: "转化率", last: 0.25, now: 0.25, isRate: true },
+        ],
+        subPoi: [
+          { name: "主票", intent: 60, paid: 15, gtv: 120 },
+          { name: "套票", intent: 25, paid: 6, gtv: 50 },
+          { name: "增值", intent: 15, paid: 4, gtv: 30 },
+        ],
+        gtvCompare: { last: 160, now: 200 },
+        visitAdr: [
+          { name: "访购率", last: 0.21, now: 0.25, isRate: true },
+          { name: "ADR", last: 140, now: 160, unit: "元" },
+        ],
+      },
     },
     {
       id: "B",
@@ -75,11 +89,25 @@ window.DASH_DATA = {
       paid: 20,
       gtv: 160,
       delta: 0.10,
-      children: [
-        { name: "景区 B · 主票", intent: 50, paid: 12, gtv: 100 },
-        { name: "景区 B · 套票", intent: 20, paid: 5, gtv: 40 },
-        { name: "景区 B · 增值", intent: 10, paid: 3, gtv: 20 },
-      ],
+      detail: {
+        aoi: [
+          { metric: "曝光 UV", last: 100, now: 110, unit: "万" },
+          { metric: "意向 UV", last: 70, now: 80, unit: "万" },
+          { metric: "支付 UV", last: 18, now: 20, unit: "万" },
+          { metric: "GTV", last: 145, now: 160, unit: "万" },
+          { metric: "转化率", last: 0.26, now: 0.25, isRate: true },
+        ],
+        subPoi: [
+          { name: "主票", intent: 50, paid: 12, gtv: 100 },
+          { name: "套票", intent: 20, paid: 5, gtv: 40 },
+          { name: "增值", intent: 10, paid: 3, gtv: 20 },
+        ],
+        gtvCompare: { last: 145, now: 160 },
+        visitAdr: [
+          { name: "访购率", last: 0.26, now: 0.25, isRate: true },
+          { name: "ADR", last: 150, now: 152, unit: "元" },
+        ],
+      },
     },
     {
       id: "C",
@@ -88,11 +116,25 @@ window.DASH_DATA = {
       paid: 30,
       gtv: 240,
       delta: 0.30,
-      children: [
-        { name: "景区 C · 主票", intent: 70, paid: 18, gtv: 140 },
-        { name: "景区 C · 套票", intent: 30, paid: 8, gtv: 60 },
-        { name: "景区 C · 增值", intent: 20, paid: 4, gtv: 40 },
-      ],
+      detail: {
+        aoi: [
+          { metric: "曝光 UV", last: 130, now: 170, unit: "万" },
+          { metric: "意向 UV", last: 90, now: 120, unit: "万" },
+          { metric: "支付 UV", last: 22, now: 30, unit: "万" },
+          { metric: "GTV", last: 185, now: 240, unit: "万" },
+          { metric: "转化率", last: 0.24, now: 0.25, isRate: true },
+        ],
+        subPoi: [
+          { name: "主票", intent: 70, paid: 18, gtv: 140 },
+          { name: "套票", intent: 30, paid: 8, gtv: 60 },
+          { name: "增值", intent: 20, paid: 4, gtv: 40 },
+        ],
+        gtvCompare: { last: 185, now: 240 },
+        visitAdr: [
+          { name: "访购率", last: 0.24, now: 0.25, isRate: true },
+          { name: "ADR", last: 158, now: 168, unit: "元" },
+        ],
+      },
     },
     {
       id: "D",
@@ -101,11 +143,25 @@ window.DASH_DATA = {
       paid: 15,
       gtv: 120,
       delta: -0.08,
-      children: [
-        { name: "景区 D · 主票", intent: 35, paid: 9, gtv: 70 },
-        { name: "景区 D · 套票", intent: 15, paid: 4, gtv: 30 },
-        { name: "景区 D · 增值", intent: 10, paid: 2, gtv: 20 },
-      ],
+      detail: {
+        aoi: [
+          { metric: "曝光 UV", last: 80, now: 75, unit: "万" },
+          { metric: "意向 UV", last: 65, now: 60, unit: "万" },
+          { metric: "支付 UV", last: 16, now: 15, unit: "万" },
+          { metric: "GTV", last: 130, now: 120, unit: "万" },
+          { metric: "转化率", last: 0.25, now: 0.25, isRate: true },
+        ],
+        subPoi: [
+          { name: "主票", intent: 35, paid: 9, gtv: 70 },
+          { name: "套票", intent: 15, paid: 4, gtv: 30 },
+          { name: "增值", intent: 10, paid: 2, gtv: 20 },
+        ],
+        gtvCompare: { last: 130, now: 120 },
+        visitAdr: [
+          { name: "访购率", last: 0.25, now: 0.25, isRate: true },
+          { name: "ADR", last: 162, now: 158, unit: "元" },
+        ],
+      },
     },
   ],
 

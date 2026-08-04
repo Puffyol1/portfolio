@@ -291,11 +291,109 @@
       '"></i>增值</span></div>';
   }
 
-  // ---- 景区表格（可下钻） ----
+  // ---- 景区表格（可下钻，每个景区展开看四个栏目明细） ----
   function renderTable() {
     var wrap = $("#scenic-table");
     if (!wrap) return;
     var scenics = d.scenics;
+
+    function deltaRow(last, now, isGoodDown) {
+      var delta = (now - last) / last;
+      var dir;
+      if (isGoodDown) {
+        dir = delta <= 0 ? "up" : "down";
+      } else {
+        dir = delta >= 0 ? "up" : "down";
+      }
+      var arrow = delta >= 0 ? "▲" : "▼";
+      return '<span class="delta ' + dir + '">' + arrow + " " + fmtDelta(delta) + "</span>";
+    }
+
+    // 渲染某个景区的明细（四栏目）
+    function renderDetail(s, idx) {
+      var det = s.detail;
+      var html = '<div class="detail-grid">';
+
+      // 栏目一：AOI 整体指标
+      var aoiRows = det.aoi
+        .map(function (r) {
+          return (
+            "<tr>" +
+            "<td>" + esc(r.metric) + "</td>" +
+            '<td class="num">' + fmt(r.last, r.unit, r.isRate) + "</td>" +
+            '<td class="num">' + fmt(r.now, r.unit, r.isRate) + "</td>" +
+            '<td class="delta-cell">' + deltaRow(r.last, r.now, r.metric === "退单率") + "</td>" +
+            "</tr>"
+          );
+        })
+        .join("");
+      html += detailPanel("AOI 整体指标",
+        '<table class="detail-table">' +
+        "<thead><tr><th>指标</th><th>2025</th><th>2026</th><th>同比</th></tr></thead>" +
+        "<tbody>" + aoiRows + "</tbody></table>"
+      );
+
+      // 栏目二：子 POI 独立指标
+      var subRows = det.subPoi
+        .map(function (c) {
+          return (
+            "<tr>" +
+            "<td>" + esc(c.name) + "</td>" +
+            '<td class="num">' + fmt(c.intent, "万") + "</td>" +
+            '<td class="num">' + fmt(c.paid, "万") + "</td>" +
+            '<td class="num">' + fmt(c.gtv, "万") + "</td>" +
+            "</tr>"
+          );
+        })
+        .join("");
+      html += detailPanel("子 POI 独立指标",
+        '<table class="detail-table">' +
+        "<thead><tr><th>子 POI</th><th>意向 UV</th><th>支付 UV</th><th>GTV</th></tr></thead>" +
+        "<tbody>" + subRows + "</tbody></table>"
+      );
+
+      // 栏目三：GTV 对比（2025 vs 2026 双柱）
+      var gMax = Math.max(det.gtvCompare.last, det.gtvCompare.now);
+      var hLast = Math.round((det.gtvCompare.last / gMax) * 100);
+      var hNow = Math.round((det.gtvCompare.now / gMax) * 100);
+      html += detailPanel("GTV 对比",
+        '<div class="detail-bar">' +
+        '<div class="detail-bar__item"><div class="detail-bar__bar" style="height:' + hLast + '%;background:' + P.slate + '"><span>' + fmt(det.gtvCompare.last, "万") + "</span></div><label>2025</label></div>" +
+        '<div class="detail-bar__item"><div class="detail-bar__bar" style="height:' + hNow + '%;background:' + P.blue + '"><span>' + fmt(det.gtvCompare.now, "万") + "</span></div><label>2026</label></div>" +
+        "</div>"
+      );
+
+      // 栏目四：访购率 & ADR 对比
+      var vaRows = det.visitAdr
+        .map(function (r) {
+          return (
+            "<tr>" +
+            "<td>" + esc(r.name) + "</td>" +
+            '<td class="num">' + fmt(r.last, r.unit, r.isRate) + "</td>" +
+            '<td class="num">' + fmt(r.now, r.unit, r.isRate) + "</td>" +
+            '<td class="delta-cell">' + deltaRow(r.last, r.now, r.name === "退单率") + "</td>" +
+            "</tr>"
+          );
+        })
+        .join("");
+      html += detailPanel("访购率 & ADR 对比",
+        '<table class="detail-table">' +
+        "<thead><tr><th>指标</th><th>2025</th><th>2026</th><th>同比</th></tr></thead>" +
+        "<tbody>" + vaRows + "</tbody></table>"
+      );
+
+      html += "</div>";
+      return html;
+    }
+
+    function detailPanel(title, body) {
+      return (
+        '<div class="detail-panel">' +
+        '<h4 class="detail-panel__title">' + esc(title) + "</h4>" +
+        '<div class="detail-panel__body">' + body + "</div>" +
+        "</div>"
+      );
+    }
 
     var rows = scenics
       .map(function (s, idx) {
@@ -309,20 +407,12 @@
           "<td>" + fmt(s.gtv, "万") + "</td>" +
           '<td><span class="delta ' + dir + '">' + arrow + " " + fmtDelta(s.delta) + "</span></td>" +
           "</tr>";
-        var children = s.children
-          .map(function (c) {
-            return (
-              '<tr class="scenic-child" data-parent="' + idx + '" hidden>' +
-              '<td><span class="name">' + esc(c.name) + "</span></td>" +
-              "<td>" + fmt(c.intent, "万") + "</td>" +
-              "<td>" + fmt(c.paid, "万") + "</td>" +
-              "<td>" + fmt(c.gtv, "万") + "</td>" +
-              "<td></td>" +
-              "</tr>"
-            );
-          })
-          .join("");
-        return head + children;
+        // 明细行：跨满整行，下钻展开
+        var detail =
+          '<tr class="scenic-detail" data-parent="' + idx + '" hidden>' +
+          '<td colspan="5">' + renderDetail(s, idx) + "</td>" +
+          "</tr>";
+        return head + detail;
       })
       .join("");
 
@@ -335,7 +425,7 @@
       row.addEventListener("click", function () {
         var idx = row.getAttribute("data-idx");
         var open = row.classList.toggle("open");
-        $$('.scenic-child[data-parent="' + idx + '"]', wrap).forEach(function (c) {
+        $$('.scenic-detail[data-parent="' + idx + '"]', wrap).forEach(function (c) {
           c.hidden = !open;
         });
       });
