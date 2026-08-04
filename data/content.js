@@ -21,7 +21,7 @@ window.SITE_CONTENT = {
     name: "计奕佳",
     tagline: "Product Manager · Incoming Master's",
     intro:
-      "工商管理本科，即将进入中国人民大学攻读人力资源硕士。有运营和产品两段实习经历，逐渐确认自己想做的事是理解用户需求，并把它做成具体的产品。",
+      "工商管理本科，即将进入中国人民大学攻读人力资源硕士。有运营和产品四段实习经历，逐渐确认自己想做的事是理解用户需求，并把它做成具体的产品。",
     primaryCta: { label: "View Experience", href: "#experience" },
     secondaryCta: { label: "Get in Touch", href: "#contact" },
   },
