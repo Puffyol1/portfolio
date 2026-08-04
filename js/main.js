@@ -95,7 +95,7 @@
               '<div class="edu-detail" id="edu-detail-' + idx + '" role="region" aria-labelledby="edu-head-' + idx + '">' +
               '<div class="edu-detail__inner">' +
               '<p class="edu-gpa"><span class="edu-gpa__label">平均分</span><span class="edu-gpa__val">' + esc(det.gpa) + "</span></p>" +
-              '<p class="subheading" style="margin-top:14px">修读课程</p>' +
+              '<p class="edu-courses__heading">修读课程</p>' +
               '<div class="edu-courses">' + groups + "</div>" +
               "</div>" +
               "</div>";
@@ -438,6 +438,45 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  // ---- 导航高亮：滚动到哪个 section 就高亮对应导航项 ----
+  function initNavHighlight() {
+    var navLinks = $$(".nav__links a");
+    if (!navLinks.length || !("IntersectionObserver" in window)) return;
+
+    // 建立 href → 链接 的映射
+    var linkMap = {};
+    navLinks.forEach(function (a) {
+      var id = a.getAttribute("href").replace("#", "");
+      if (id) linkMap[id] = a;
+    });
+
+    var sections = Object.keys(linkMap)
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+
+    if (!sections.length) return;
+
+    var active = null;
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            if (active === id) return;
+            active = id;
+            navLinks.forEach(function (a) {
+              a.classList.toggle("is-active", a === linkMap[id]);
+            });
+          }
+        });
+      },
+      // 触发点：视口中上部
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+
+    sections.forEach(function (s) { io.observe(s); });
+  }
+
   // ---- 启动 ----
   function init() {
     fill(document, "hero");
@@ -450,6 +489,7 @@
     renderFooter();
     initReveal();
     initHeaderScroll();
+    initNavHighlight();
   }
 
   if (document.readyState === "loading") {
