@@ -27,8 +27,12 @@
       .replace(/"/g, "&quot;");
   }
 
+  // data-attr 名 → content 键名映射（不一致时用）
+  var DATA_KEY_MAP = { academic: "academicProjects" };
+
   // 按 data-{section}="key" 填充单个文本节点
   function fill(root, dataKey) {
+    var contentKey = DATA_KEY_MAP[dataKey] || dataKey;
     $$("[data-" + dataKey + "]", root).forEach(function (el) {
       var key = el.getAttribute("data-" + dataKey);
       if (dataKey === "hero") {
@@ -42,8 +46,8 @@
         } else if (c.hero[key] != null) {
           el.textContent = c.hero[key];
         }
-      } else if (c[dataKey] && typeof c[dataKey][key] === "string") {
-        el.textContent = c[dataKey][key];
+      } else if (c[contentKey] && typeof c[contentKey][key] === "string") {
+        el.textContent = c[contentKey][key];
       }
     });
   }
@@ -88,7 +92,7 @@
             });
 
             detail =
-              '<div class="edu-detail" id="edu-detail-' + idx + '" role="region" aria-labelledby="edu-head-' + idx + '" hidden>' +
+              '<div class="edu-detail" id="edu-detail-' + idx + '" role="region" aria-labelledby="edu-head-' + idx + '">' +
               '<div class="edu-detail__inner">' +
               '<p class="edu-gpa"><span class="edu-gpa__label">平均分</span><span class="edu-gpa__val">' + esc(det.gpa) + "</span></p>" +
               '<p class="subheading" style="margin-top:14px">修读课程</p>' +
@@ -106,11 +110,27 @@
         if (btn.tagName !== "BUTTON") return;
         btn.addEventListener("click", function () {
           var open = btn.getAttribute("aria-expanded") === "true";
-          btn.setAttribute("aria-expanded", String(!open));
           var detail = btn.parentElement.querySelector(".edu-detail");
-          if (detail) {
-            detail.hidden = open;
-            btn.parentElement.classList.toggle("is-open", !open);
+          if (!detail) return;
+          if (open) {
+            // 收起：先撑开当前高度再归零，触发过渡
+            detail.style.maxHeight = detail.scrollHeight + "px";
+            requestAnimationFrame(function () {
+              detail.style.maxHeight = "0px";
+            });
+            btn.setAttribute("aria-expanded", "false");
+            btn.parentElement.classList.remove("is-open");
+          } else {
+            // 展开
+            detail.style.maxHeight = detail.scrollHeight + "px";
+            btn.setAttribute("aria-expanded", "true");
+            btn.parentElement.classList.add("is-open");
+            detail.addEventListener("transitionend", function onEnd() {
+              if (btn.getAttribute("aria-expanded") === "true") {
+                detail.style.maxHeight = "none";
+              }
+              detail.removeEventListener("transitionend", onEnd);
+            });
           }
         });
       });
