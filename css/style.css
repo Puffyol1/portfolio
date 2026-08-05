@@ -638,9 +638,93 @@ h3 {
   color: var(--neon-line-strong);
 }
 
-/* ============================================================
-   精选项目（可展开卡片）
-   ============================================================ */
+/* 经历条目内的可展开项目案例 */
+.exp-cases {
+  margin-top: 14px;
+}
+
+.exp-cases__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--neon);
+  background: var(--neon-tint);
+  border: 1px solid var(--neon-line);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.exp-cases__toggle:hover {
+  border-color: var(--neon-line-strong);
+  box-shadow: var(--glow-sm);
+}
+
+.exp-cases__caret {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+
+.exp-cases__toggle[aria-expanded="true"] .exp-cases__caret {
+  transform: rotate(45deg);
+}
+
+.exp-cases__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease);
+}
+
+.exp-cases__inner {
+  padding-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.exp-case {
+  padding: 16px 18px;
+  background: var(--bg-elev);
+  border: 1px solid var(--neon-line);
+  border-radius: var(--radius-sm);
+}
+
+.exp-case__title {
+  margin: 0 0 12px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding-left: 8px;
+  border-left: 3px solid var(--neon);
+}
+
+.exp-case__body dt {
+  margin: 12px 0 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neon);
+  font-weight: 600;
+}
+
+.exp-case__body dt:first-child {
+  margin-top: 0;
+}
+
+.exp-case__body dd {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--fs-small);
+}
+
+@media (max-width: 640px) {
+  .exp-case {
+    padding: 14px 14px;
+  }
+}
 .projects {
   display: grid;
   gap: 16px;

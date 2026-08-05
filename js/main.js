@@ -211,12 +211,44 @@
     var list = $("[data-experience='items']", root);
     if (list) {
       list.innerHTML = c.experience.items
-        .map(function (it) {
-          var points = it.points
+        .map(function (it, idx) {
+          var points = (it.points || [])
             .map(function (p) {
               return "<li>" + esc(p) + "</li>";
             })
             .join("");
+
+          // 可展开的项目案例（如有 cases）
+          var cases = "";
+          var hasCases = it.cases && it.cases.length;
+          if (hasCases) {
+            var caseItems = it.cases
+              .map(function (cs, ci) {
+                return (
+                  '<div class="exp-case">' +
+                  '<h4 class="exp-case__title">' + esc(cs.title) + "</h4>" +
+                  '<dl class="exp-case__body">' +
+                  "<dt>背景</dt><dd>" + esc(cs.background) + "</dd>" +
+                  "<dt>工作内容</dt><dd>" + esc(cs.work) + "</dd>" +
+                  "<dt>业务价值</dt><dd>" + esc(cs.value) + "</dd>" +
+                  "</dl>" +
+                  "</div>"
+                );
+              })
+              .join("");
+            cases =
+              '<div class="exp-cases">' +
+              '<button class="exp-cases__toggle" type="button" ' +
+              'aria-expanded="false" aria-controls="exp-cases-' + idx + '" id="exp-toggle-' + idx + '">' +
+              '<span>查看项目案例（' + it.cases.length + '）</span>' +
+              '<span class="exp-cases__caret" aria-hidden="true">+</span>' +
+              "</button>" +
+              '<div class="exp-cases__body" id="exp-cases-' + idx + '" role="region" aria-labelledby="exp-toggle-' + idx + '">' +
+              '<div class="exp-cases__inner">' + caseItems + "</div>" +
+              "</div>" +
+              "</div>";
+          }
+
           return (
             "<li>" +
             '<span class="period">' +
@@ -230,14 +262,34 @@
             '<p class="summary">' +
             esc(it.summary) +
             "</p>" +
-            '<ul class="points">' +
-            points +
-            "</ul>" +
+            (points ? '<ul class="points">' + points + "</ul>" : "") +
+            cases +
             "</li>"
           );
         })
         .join("");
     }
+
+    // 绑定案例展开/收起
+    $$(".exp-cases__toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        var body = btn.parentElement.querySelector(".exp-cases__body");
+        if (!body) return;
+        if (open) {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(function () { body.style.maxHeight = "0px"; });
+          btn.setAttribute("aria-expanded", "false");
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true");
+          body.addEventListener("transitionend", function onEnd() {
+            if (btn.getAttribute("aria-expanded") === "true") body.style.maxHeight = "none";
+            body.removeEventListener("transitionend", onEnd);
+          });
+        }
+      });
+    });
   }
 
   // ---- 渲染：精选项目（可展开卡片）----
