@@ -213,10 +213,10 @@ h3 {
   z-index: 2;
 }
 
-/* 头像：贴在 hero 左侧，竖椭圆，不影响居中姓名 */
+/* 头像：贴在 hero 右侧，竖椭圆，不影响居中姓名 */
 .hero__avatar-wrap {
   position: absolute;
-  left: max(16px, 8vw);
+  right: max(16px, 8vw);
   top: 50%;
   transform: translateY(-50%);
   width: 150px;
@@ -1315,7 +1315,7 @@ h3 {
     height: 84px;
   }
   .hero__avatar-wrap {
-    left: 8px;
+    right: 8px;
     top: 12px;
     transform: none;
   }
