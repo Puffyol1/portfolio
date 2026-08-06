@@ -245,9 +245,10 @@ window.SITE_CONTENT = {
       {
         name: "AI Coding",
         desc: "用结构化的需求驱动 AI 生成代码，并对结果把关。",
-        tags: ["Prompt 设计", "代码审阅", "快速原型", "Skills 编写"],
+        tags: ["Prompt 设计", "代码审阅", "快速原型"],
+        expandableTag: "Skills 编写",
         detail:
-          "Skills 编写：能把复杂业务规则封装成 Claude Code 可调用的 Skill（指令包）。写过业绩核查类工具——将去年存量与今年增量比对，用规则引擎 + LLM 词级判断自动识别「存量包装成增量」的误判，输出可人工核对的报告。",
+          "能把复杂业务规则封装成 Agent 可执行的技能包。写过业绩核查类工具——将去年存量与今年增量比对，用规则引擎 + LLM 词级判断自动识别「存量包装成增量」的误判，输出可人工核对的报告。",
       },
       {
         name: "NoCode",

@@ -1055,35 +1055,39 @@ h3 {
   background: rgba(var(--s), 0.05);
 }
 
-/* Skill 可展开详情 */
-.skill__toggle {
+/* Skill 可展开标签（点标签展开详情） */
+.skill__tag-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 14px;
-  padding: 6px 14px;
-  font-size: 0.76rem;
-  font-weight: 600;
+  gap: 5px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
   font-family: inherit;
-  color: rgb(var(--s));
-  background: rgba(var(--s), 0.06);
+  color: var(--ink-mute);
+  background: rgba(var(--s), 0.05);
   border: 1px solid rgba(var(--s), 0.28);
   border-radius: 999px;
   cursor: pointer;
-  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
 }
 
-.skill__toggle:hover {
+.skill__tag-btn:hover,
+.skill__tag-btn[aria-expanded="true"] {
+  color: rgb(var(--s));
   border-color: rgba(var(--s), 0.55);
   box-shadow: 0 0 14px -4px rgba(var(--s), 0.4);
 }
 
 .skill__caret {
   display: inline-block;
+  font-size: 0.9rem;
+  line-height: 1;
   transition: transform 0.3s var(--ease);
 }
 
-.skill__toggle[aria-expanded="true"] .skill__caret {
+.skill__tag-btn[aria-expanded="true"] .skill__caret {
   transform: rotate(45deg);
 }
 

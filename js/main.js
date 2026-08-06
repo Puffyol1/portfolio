@@ -401,12 +401,16 @@
             return "<li>" + esc(t) + "</li>";
           })
           .join("");
+        // 可展开的标签（点标签本身展开详情）
+        var expandable = "";
         var detail = "";
-        if (g.detail) {
+        if (g.expandableTag) {
+          expandable =
+            '<li><button class="skill__tag-btn" type="button" aria-expanded="false" aria-controls="skill-detail-' + gi + '" id="skill-toggle-' + gi + '">' +
+            esc(g.expandableTag) +
+            '<span class="skill__caret" aria-hidden="true">+</span>' +
+            "</button></li>";
           detail =
-            '<button class="skill__toggle" type="button" aria-expanded="false" aria-controls="skill-detail-' + gi + '" id="skill-toggle-' + gi + '">' +
-            '<span>Skill 详情</span><span class="skill__caret" aria-hidden="true">+</span>' +
-            "</button>" +
             '<div class="skill__detail" id="skill-detail-' + gi + '" role="region" aria-labelledby="skill-toggle-' + gi + '">' +
             '<p class="skill__detail-text">' + esc(g.detail) + "</p>" +
             "</div>";
@@ -421,6 +425,7 @@
           "</p>" +
           '<ul class="skill__tags">' +
           tags +
+          expandable +
           "</ul>" +
           detail +
           "</div>"
@@ -428,11 +433,11 @@
       })
       .join("");
 
-    // 绑定 Skill 详情展开
-    $$(".skill__toggle").forEach(function (btn) {
+    // 绑定 Skill 详情展开（点标签本身）
+    $$(".skill__tag-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
         var open = btn.getAttribute("aria-expanded") === "true";
-        var body = btn.parentElement.querySelector(".skill__detail");
+        var body = btn.closest(".skill").querySelector(".skill__detail");
         if (!body) return;
         if (open) {
           body.style.maxHeight = body.scrollHeight + "px";
