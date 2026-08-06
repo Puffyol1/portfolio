@@ -207,14 +207,26 @@ h3 {
   margin: 0 auto;
 }
 
+.hero__top {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 24px;
+}
+
 .hero__avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 130px;
+  height: 160px;
+  border-radius: 16px;
   object-fit: cover;
-  margin-bottom: 22px;
+  flex-shrink: 0;
   border: 2px solid var(--neon-line-strong);
   box-shadow: var(--glow-sm), var(--shadow-card);
+}
+
+.hero__top-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .hero__tagline {
@@ -1264,9 +1276,12 @@ h3 {
     padding: 60px 20px 48px;
   }
   .hero__avatar {
-    width: 96px;
-    height: 96px;
-    margin-bottom: 18px;
+    width: 88px;
+    height: 108px;
+    border-radius: 12px;
+  }
+  .hero__top {
+    gap: 16px;
   }
   .hero__name-en {
     font-size: clamp(3rem, 22vw, 5.5rem);
