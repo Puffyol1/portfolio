@@ -395,12 +395,22 @@
     if (!wrap) return;
 
     wrap.innerHTML = c.skills.groups
-      .map(function (g) {
+      .map(function (g, gi) {
         var tags = g.tags
           .map(function (t) {
             return "<li>" + esc(t) + "</li>";
           })
           .join("");
+        var detail = "";
+        if (g.detail) {
+          detail =
+            '<button class="skill__toggle" type="button" aria-expanded="false" aria-controls="skill-detail-' + gi + '" id="skill-toggle-' + gi + '">' +
+            '<span>Skill 详情</span><span class="skill__caret" aria-hidden="true">+</span>' +
+            "</button>" +
+            '<div class="skill__detail" id="skill-detail-' + gi + '" role="region" aria-labelledby="skill-toggle-' + gi + '">' +
+            '<p class="skill__detail-text">' + esc(g.detail) + "</p>" +
+            "</div>";
+        }
         return (
           '<div class="skill">' +
           '<h3 class="skill__name">' +
@@ -412,10 +422,32 @@
           '<ul class="skill__tags">' +
           tags +
           "</ul>" +
+          detail +
           "</div>"
         );
       })
       .join("");
+
+    // 绑定 Skill 详情展开
+    $$(".skill__toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        var body = btn.parentElement.querySelector(".skill__detail");
+        if (!body) return;
+        if (open) {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(function () { body.style.maxHeight = "0px"; });
+          btn.setAttribute("aria-expanded", "false");
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true");
+          body.addEventListener("transitionend", function onEnd() {
+            if (btn.getAttribute("aria-expanded") === "true") body.style.maxHeight = "none";
+            body.removeEventListener("transitionend", onEnd);
+          });
+        }
+      });
+    });
   }
 
   // ---- 渲染：联系方式 ----

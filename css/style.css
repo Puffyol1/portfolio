@@ -1055,6 +1055,55 @@ h3 {
   background: rgba(var(--s), 0.05);
 }
 
+/* Skill 可展开详情 */
+.skill__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 6px 14px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: rgb(var(--s));
+  background: rgba(var(--s), 0.06);
+  border: 1px solid rgba(var(--s), 0.28);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.skill__toggle:hover {
+  border-color: rgba(var(--s), 0.55);
+  box-shadow: 0 0 14px -4px rgba(var(--s), 0.4);
+}
+
+.skill__caret {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+
+.skill__toggle[aria-expanded="true"] .skill__caret {
+  transform: rotate(45deg);
+}
+
+.skill__detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease);
+}
+
+.skill__detail-text {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  background: rgba(var(--s), 0.04);
+  border-left: 2px solid rgba(var(--s), 0.4);
+  border-radius: 0 8px 8px 0;
+  line-height: 1.75;
+}
+
 /* ============================================================
    联系方式
    ============================================================ */
