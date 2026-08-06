@@ -207,6 +207,16 @@ h3 {
   margin: 0 auto;
 }
 
+.hero__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 22px;
+  border: 2px solid var(--neon-line-strong);
+  box-shadow: var(--glow-sm), var(--shadow-card);
+}
+
 .hero__tagline {
   margin: 0 0 18px;
   font-size: var(--fs-small);
@@ -1252,6 +1262,11 @@ h3 {
   .hero {
     min-height: 80vh;
     padding: 60px 20px 48px;
+  }
+  .hero__avatar {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 18px;
   }
   .hero__name-en {
     font-size: clamp(3rem, 22vw, 5.5rem);
