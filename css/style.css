@@ -202,41 +202,44 @@ h3 {
   padding: 80px 24px 60px;
 }
 
+.hero {
+  position: relative;
+}
+
 .hero__inner {
   max-width: var(--container);
   margin: 0 auto;
-}
-
-.hero__top {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  margin-bottom: 24px;
-}
-
-.hero__avatar-wrap {
   position: relative;
-  flex-shrink: 0;
-  width: 130px;
-  height: 160px;
+  z-index: 2;
+}
+
+/* 头像：贴在 hero 左侧，竖椭圆，不影响居中姓名 */
+.hero__avatar-wrap {
+  position: absolute;
+  left: max(16px, 8vw);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 200px;
+  z-index: 1;
 }
 
 .hero__avatar {
   position: relative;
   z-index: 1;
-  width: 130px;
-  height: 160px;
-  border-radius: 16px;
+  width: 150px;
+  height: 200px;
+  border-radius: 50% / 46%;
   object-fit: cover;
   display: block;
   box-shadow: var(--shadow-card);
 }
 
-/* 线条交错的装饰边框：三条不同色细线，错位偏移 */
+/* 线条交错装饰边框：三条不同色椭圆细线，错位偏移 */
 .hero__avatar-line {
   position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: 50% / 46%;
   border: 1.5px solid;
   pointer-events: none;
   z-index: 0;
@@ -244,25 +247,20 @@ h3 {
 
 .hero__avatar-line--1 {
   border-color: var(--neon);
-  transform: translate(8px, 8px);
+  transform: translate(10px, 10px);
   opacity: 0.7;
 }
 
 .hero__avatar-line--2 {
   border-color: #ff5fa8;
-  transform: translate(-7px, -6px);
+  transform: translate(-8px, -7px);
   opacity: 0.6;
 }
 
 .hero__avatar-line--3 {
   border-color: #ffd23f;
-  transform: translate(4px, -9px);
+  transform: translate(5px, -11px);
   opacity: 0.55;
-}
-
-.hero__top-text {
-  flex: 1;
-  min-width: 0;
 }
 
 .hero__tagline {
@@ -1313,21 +1311,21 @@ h3 {
   }
   .hero__avatar,
   .hero__avatar-wrap {
-    width: 88px;
-    height: 108px;
+    width: 64px;
+    height: 84px;
   }
-  .hero__avatar {
-    border-radius: 12px;
+  .hero__avatar-wrap {
+    left: 8px;
+    top: 12px;
+    transform: none;
   }
+  .hero__avatar,
   .hero__avatar-line {
-    border-radius: 12px;
+    border-radius: 50% / 46%;
   }
-  .hero__avatar-line--1 { transform: translate(6px, 6px); }
-  .hero__avatar-line--2 { transform: translate(-5px, -4px); }
-  .hero__avatar-line--3 { transform: translate(3px, -6px); }
-  .hero__top {
-    gap: 16px;
-  }
+  .hero__avatar-line--1 { transform: translate(5px, 5px); }
+  .hero__avatar-line--2 { transform: translate(-4px, -3px); }
+  .hero__avatar-line--3 { transform: translate(3px, -5px); }
   .hero__name-en {
     font-size: clamp(3rem, 22vw, 5.5rem);
     -webkit-text-stroke-width: 1px;

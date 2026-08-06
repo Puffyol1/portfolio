@@ -35,21 +35,17 @@
     <main>
       <!-- 1. 首屏 Hero -->
       <section class="hero" id="hero" aria-labelledby="hero-name">
+        <div class="hero__avatar-wrap">
+          <span class="hero__avatar-line hero__avatar-line--1"></span>
+          <span class="hero__avatar-line hero__avatar-line--2"></span>
+          <span class="hero__avatar-line hero__avatar-line--3"></span>
+          <img class="hero__avatar" src="assets/headshot.jpg" alt="计奕佳" loading="lazy" />
+        </div>
         <div class="hero__inner reveal">
-          <div class="hero__top">
-            <div class="hero__avatar-wrap">
-              <span class="hero__avatar-line hero__avatar-line--1"></span>
-              <span class="hero__avatar-line hero__avatar-line--2"></span>
-              <span class="hero__avatar-line hero__avatar-line--3"></span>
-              <img class="hero__avatar" src="assets/headshot.jpg" alt="计奕佳" loading="lazy" />
-            </div>
-            <div class="hero__top-text">
-              <p class="hero__tagline" data-hero="tagline"></p>
-              <div class="hero__name-wrap">
-                <span class="hero__name-en" aria-hidden="true">Jenny Ji</span>
-                <h1 class="hero__name" id="hero-name" data-hero="name"></h1>
-              </div>
-            </div>
+          <p class="hero__tagline" data-hero="tagline"></p>
+          <div class="hero__name-wrap">
+            <span class="hero__name-en" aria-hidden="true">Jenny Ji</span>
+            <h1 class="hero__name" id="hero-name" data-hero="name"></h1>
           </div>
           <p class="hero__intro" data-hero="intro"></p>
           <div class="hero__cta">
