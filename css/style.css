@@ -216,7 +216,7 @@ h3 {
 /* 头像：贴在 hero 右侧，竖椭圆，离文字近一些 */
 .hero__avatar-wrap {
   position: absolute;
-  right: -6px;
+  right: -170px;
   top: 50%;
   transform: translateY(-50%);
   width: 150px;
