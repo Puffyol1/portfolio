@@ -1055,15 +1055,24 @@ h3 {
   background: rgba(var(--s), 0.05);
 }
 
-/* Skill 可展开标签（点标签展开详情） */
+/* 含可展开按钮的 li：去掉自身 pill，让 button 承担外观，保持一致 */
+.skill__tags li:has(.skill__tag-btn),
+.skill__tags .skill__tag-li {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+/* Skill 可展开标签（点标签展开详情）—— 外观与普通 li 一致 */
 .skill__tag-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 4px 12px;
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 400;
   font-family: inherit;
+  line-height: 1.6;
   color: var(--ink-mute);
   background: rgba(var(--s), 0.05);
   border: 1px solid rgba(var(--s), 0.28);

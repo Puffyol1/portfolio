@@ -406,7 +406,7 @@
         var detail = "";
         if (g.expandableTag) {
           expandable =
-            '<li><button class="skill__tag-btn" type="button" aria-expanded="false" aria-controls="skill-detail-' + gi + '" id="skill-toggle-' + gi + '">' +
+            '<li class="skill__tag-li"><button class="skill__tag-btn" type="button" aria-expanded="false" aria-controls="skill-detail-' + gi + '" id="skill-toggle-' + gi + '">' +
             esc(g.expandableTag) +
             '<span class="skill__caret" aria-hidden="true">+</span>' +
             "</button></li>";
