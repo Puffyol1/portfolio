@@ -322,7 +322,7 @@
           (p.demo
             ? '<a class="project-card__demo" href="' +
               esc(p.demo) +
-              '">查看脱敏演示看板 →</a>'
+              '">' + (p.title.includes("MeowFocus") ? "网站雏形（满血版）" : "查看脱敏演示看板") + ' →</a>'
             : "") +
           '<p class="project-card__summary">' +
           esc(p.summary) +
