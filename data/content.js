@@ -279,7 +279,7 @@ window.SITE_CONTENT = {
     // 如需改为防爬写法（邮箱 [at]、隐藏手机），在此调整即可
     channels: [
       { label: "GitHub", href: "https://github.com/Puffyol1", hint: "github.com/Puffyol1" },
-      { label: "Email", href: "mailto:3372604448@qq.com", hint: "3372604448@qq.com" },
+      { label: "Email", href: "mailto:jennyijiaji@outlook.com", hint: "jennyijiaji@outlook.com" },
       { label: "Phone", href: "tel:18922417617", hint: "189 2241 7617" },
     ],
   },
