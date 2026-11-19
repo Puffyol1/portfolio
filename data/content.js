@@ -10,7 +10,7 @@
 window.SITE_CONTENT = {
   meta: {
     name: "计奕佳",
-    role: "产品经理方向 · 准研究生",
+    role: "产品经理方向 · 硕士研究生",
     // 部署前替换为真实地址
     links: {
       github: "https://github.com/Puffyol1",
@@ -19,9 +19,9 @@ window.SITE_CONTENT = {
 
   hero: {
     name: "计奕佳",
-    tagline: "Product Manager · Incoming Master's",
+    tagline: "Product Manager · Master's Student",
     intro:
-      "工商管理本科，即将进入中国人民大学攻读人力资源硕士。有运营和产品四段实习经历，逐渐确认自己想做的事是理解用户需求，并把它做成具体的产品。",
+      "本科毕业于中国政法大学工商管理专业，现于中国人民大学劳动人事学院攻读人力资源开发与管理硕士。有运营和产品四段实习经历，逐渐确认自己想做的事是理解用户需求，并把它做成具体的产品。",
     primaryCta: { label: "View Experience", href: "#experience" },
     secondaryCta: { label: "Get in Touch", href: "#contact" },
   },
@@ -32,13 +32,13 @@ window.SITE_CONTENT = {
       "商科背景，先后做过内容运营和产品实习。我习惯先把问题拆清楚，再一步步推进，不喜欢停留在概念上。未来两年想往人与组织的方向深入一些。",
     education: [
       {
-        school: "中国人民大学",
-        degree: "人力资源开发与管理 · 硕士（未来 2 年）",
+        school: "中国人民大学劳动人事学院",
+        degree: "人力资源开发与管理 · 硕士在读",
         note: "劳动经济学方向，关注劳动力市场与人的经济行为。",
       },
       {
         school: "中国政法大学",
-        degree: "工商管理 · 本科（大四）",
+        degree: "工商管理 · 本科",
         note: "管理学、经济学与数据分析的基础训练。",
         detail: {
           gpa: "88.29 / 100",
@@ -60,7 +60,7 @@ window.SITE_CONTENT = {
       "结构化表达",
     ],
     interests:
-      "平时读书、慢跑，偶尔写点东西。对「工具如何改变人的工作方式」一直很感兴趣。",
+      "平时喜欢打排球、健身、读书和听播客。",
   },
 
   experience: {
